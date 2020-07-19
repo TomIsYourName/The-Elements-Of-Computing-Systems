@@ -1,0 +1,21 @@
+|   a   |   b   |  sel  |  out  |
+|   0   |   0   |   0   |   0   |
+|   0   |   0   |   1   |   0   |
+|   0   |   1   |   0   |   0   |
+|   0   |   1   |   1   |   1   | nota and b and sel
+|   1   |   0   |   0   |   1   | a and notb and notsel
+|   1   |   0   |   1   |   0   |
+|   1   |   1   |   0   |   1   | a and b and notsel
+|   1   |   1   |   1   |   1   | a and b and sel
+
+
+(nota and b and sel) or (a and notb and notsel) or (a and b and notsel) or (a and b and sel)
+
+b and sel = x
+a and notsel = y
+
+(nota and x) or (notb and y) or (b and y) or (a and x)
+
+x or y 
+
+(b and sel) or (a and notsel)

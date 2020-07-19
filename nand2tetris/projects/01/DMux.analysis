@@ -1,0 +1,7 @@
+|  in   |  sel  |   a   |   b   |
+|   0   |   0   |   0   |   0   |
+|   0   |   1   |   0   |   0   |
+|   1   |   0   |   1   |   0   | a: in and notsel
+|   1   |   1   |   0   |   1   | b: in and sel
+
+{in and notsel, in and sel} = {a, b}
