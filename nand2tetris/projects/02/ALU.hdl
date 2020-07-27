@@ -42,5 +42,14 @@ CHIP ALU {
         ng; // 1 if (out < 0),  0 otherwise
 
     PARTS:
-   // Put you code here:
+    FixInput(in=x, z=zx, n=nx, out=fixedx0);
+    FixInput(in=y, z=zy, n=ny, out=fixedy0);
+    Add16(a=fixedx0, b=fixedy0, out=sum);
+
+    FixInput(in=x, z=zx, n=nx, out=fixedx1);
+    FixInput(in=y, z=zy, n=ny, out=fixedy1);
+    And16(a=fixedx1, b=fixedy1, out=and);
+
+    Mux16(a=and, b=sum, sel=f, out=out0);
+    FixOutput(in=out0, no=no, out=out, zr=zr, ng=ng);
 }

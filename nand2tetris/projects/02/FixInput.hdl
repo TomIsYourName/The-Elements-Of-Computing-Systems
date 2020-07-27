@@ -1,0 +1,42 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/02/ALU.hdl
+
+/**
+ * The ALU (Arithmetic Logic Unit).
+ * Computes one of the following functions:
+ * x+y, x-y, y-x, 0, 1, -1, x, y, -x, -y, !x, !y,
+ * x+1, y+1, x-1, y-1, x&y, x|y on two 16-bit inputs, 
+ * according to 6 input bits denoted zx,nx,zy,ny,f,no.
+ * In addition, the ALU computes two 1-bit outputs:
+ * if the ALU output == 0, zr is set to 1; otherwise zr is set to 0;
+ * if the ALU output < 0, ng is set to 1; otherwise ng is set to 0.
+ */
+
+// Implementation: the FixInput logic manipulates the x inputs
+// and operates on the resulting values, as follows:
+// if (zx == 1) set x = 0        // 16-bit constant
+// if (nx == 1) set x = !x       // bitwise not
+
+CHIP FixInput {
+    IN  
+        in[16], // 16-bit inputs        
+        z, // zero the input?
+        n; // negate the input?
+
+    OUT 
+        out[16]; // 16-bit output
+
+    PARTS:
+    Not16(in=in, out=out0);
+    And16(a=in, b=out0, out=zeros0);
+    Mux16(a=in, b=zeros0, sel=z, out=tempx0);
+
+    Not16(in=in, out=notin1);
+    And16(a=in, b=notin1, out=zeros1);
+    Mux16(a=in, b=zeros1, sel=z, out=tempx1);
+
+    Not16(in=tempx0, out=notin2);
+    Mux16(a=tempx1, b=notin2, sel=n, out=out);
+}
